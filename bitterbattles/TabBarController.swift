@@ -1,30 +1,40 @@
-//
-//  TabBarController.swift
-//  bitterbattles
-//
-//  Created by Adam Lupinacci on 3/12/19.
-//  Copyright © 2019 Little Wolf Software. All rights reserved.
-//
-
 import UIKit
 
 class TabBarController: UITabBarController {
+    
+    // MARK: Properties
+
+    var unusedPostController: UIViewController? = nil
+    var unusedAccountController: UIViewController? = nil
+
+    // MARK: Overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        var viewControllers = self.viewControllers!
+        if API.instance.isLoggedIn() {
+            self.unusedPostController = viewControllers.remove(at: 1)
+            self.unusedAccountController = viewControllers.remove(at: 2)
+        } else {
+            self.unusedPostController = viewControllers.remove(at: 2)
+            self.unusedAccountController = viewControllers.remove(at: 3)
+        }
+        self.setViewControllers(viewControllers, animated: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(onLoginChanged(_:)), name: NSNotification.Name(rawValue: "loggedIn"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onLoginChanged(_:)), name: NSNotification.Name(rawValue: "loggedOut"), object: nil)
     }
-    
 
-    /*
-    // MARK: - Navigation
+    // MARK: Notifications
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func onLoginChanged(_ notification: Notification) {
+        var viewControllers = self.viewControllers!
+        let tempPostController = viewControllers.remove(at: 1)
+        let tempAccountController = viewControllers.remove(at: 1)
+        viewControllers.append(self.unusedPostController!)
+        viewControllers.append(self.unusedAccountController!)
+        self.setViewControllers(viewControllers, animated: false)
+        self.unusedPostController = tempPostController
+        self.unusedAccountController = tempAccountController
     }
-    */
 
 }

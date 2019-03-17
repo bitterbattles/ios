@@ -1,9 +1,11 @@
 import UIKit
 
-class BattleTableViewCell: UITableViewCell {
+class ExploreTableViewCell: UITableViewCell {
     
     // MARK: Properties
     
+    public var spinner: Spinner?
+    public var alert: Alert?
     public var id: String?
     public var votesFor: Int?
     public var votesAgainst: Int?
@@ -30,10 +32,9 @@ class BattleTableViewCell: UITableViewCell {
     
     func vote(isVoteFor: Bool) {
         if API.instance.isLoggedIn() {
-            // TODO: Start spinner
             let battleID = self.id ?? ""
+            self.spinner!.start()
             API.instance.vote(battleID: battleID, isVoteFor: isVoteFor) { errorCode in
-                // TODO: Stop spinner
                 if errorCode == ErrorCode.none {
                     if isVoteFor {
                         let votes = (self.votesFor ?? 0) + 1
@@ -48,12 +49,13 @@ class BattleTableViewCell: UITableViewCell {
                     self.voteAgainstButton.isHidden = true
                     self.votesForLabel.isHidden = false
                     self.votesAgainstLabel.isHidden = false
-                } else {
-                    // TODO: Show error message
+                }
+                self.spinner!.stop() {
+                    if errorCode != ErrorCode.none {
+                        self.alert!.error("Failed to record vote.")
+                    }
                 }
             }
-        } else {
-            // TODO: Redirect to register / log in
         }
     }
     

@@ -1,9 +1,7 @@
-//
-//  ErrorCode.swift
-//  bitterbattles
-//
-//  Created by Adam Lupinacci on 3/11/19.
-//  Copyright © 2019 Little Wolf Software. All rights reserved.
-//
-
 import Foundation
+
+enum ErrorCode: Int {
+    case none = 0,
+    unknown = 1000,
+    usernameTaken = 1001
+}
