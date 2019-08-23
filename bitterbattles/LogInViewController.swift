@@ -45,7 +45,7 @@ class LogInViewController: UIViewController {
         let username = self.usernameText.text ?? ""
         let password = self.passwordText.text ?? ""
         if username.count == 0 || password.count == 0 {
-            self.alert!.error("Input fiels are invalid.")
+            self.alert!.error("Input fields are invalid.")
             return
         }
         self.spinner!.start()

@@ -19,21 +19,9 @@ class API {
         return accessToken != ""
     }
     
-    public func getBattles(sort: String, page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Battle]) -> Void) {
+    public func getBattlesGlobal(sort: String, page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Battle]) -> Void) {
         let uri = "battles?sort=\(sort)&page=\(page)&pageSize=\(pageSize)"
-        request(method: "GET", uri: uri, body: [:], completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
-            let errorCode = self.getErrorCode(error: error, response: response, data: data)
-            if errorCode != ErrorCode.none {
-                completion(errorCode, [])
-            }
-            var battles :[Battle] = []
-            if data != nil, let results = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
-                for case let result in results ?? [] {
-                    battles.append(Battle(data: result))
-                }
-            }
-            completion(ErrorCode.none, battles)
-        })
+        requestBattles(uri: uri, completion: completion)
     }
     
     public func signUp(username: String, password: String, completion: @escaping (ErrorCode) -> Void) {
@@ -61,6 +49,16 @@ class API {
         })
     }
     
+    public func getMyBattles(sort: String, page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Battle]) -> Void) {
+        let uri = "users/me/battles?sort=\(sort)&page=\(page)&pageSize=\(pageSize)"
+        requestBattles(uri: uri, completion: completion)
+    }
+    
+    public func getMyVotes(page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Battle]) -> Void) {
+        let uri = "votes/me/battles?page=\(page)&pageSize=\(pageSize)"
+        requestBattles(uri: uri, completion: completion)
+    }
+    
     public func logOut() {
         self.setAccessToken(value: "")
         NotificationCenter.default.post(name: Notification.Name(rawValue: "loggedOut"), object: nil)
@@ -85,6 +83,22 @@ class API {
     }
     
     // MARK: Private methods
+    
+    func requestBattles(uri: String, completion: @escaping (ErrorCode, [Battle]) -> Void) {
+        request(method: "GET", uri: uri, body: [:], completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            let errorCode = self.getErrorCode(error: error, response: response, data: data)
+            if errorCode != ErrorCode.none {
+                completion(errorCode, [])
+            }
+            var battles :[Battle] = []
+            if data != nil, let results = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
+                for case let result in results ?? [] {
+                    battles.append(Battle(data: result))
+                }
+            }
+            completion(ErrorCode.none, battles)
+        })
+    }
     
     func request(method: String, uri: String, body: [String: Any], completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let session = URLSession(configuration: .ephemeral, delegate: nil, delegateQueue: .main)

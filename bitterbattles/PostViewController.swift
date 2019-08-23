@@ -1,11 +1,12 @@
 import UIKit
 
-class PostViewController: UIViewController {
+class PostViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Properties
-
+    
     @IBOutlet weak var titleText: UITextField!
-    @IBOutlet weak var descriptionText: UITextField!
+    @IBOutlet weak var descriptionText: UITextView!
+    var placeholderLabel: UILabel!
     var spinner: Spinner?
     var alert: Alert?
     
@@ -15,7 +16,23 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         self.spinner = Spinner(self)
         self.alert = Alert(self)
+        self.descriptionText.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Description"
+        placeholderLabel.font = UIFont.systemFont(ofSize: (descriptionText.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        descriptionText.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: (descriptionText.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.5)
+        placeholderLabel.isHidden = !descriptionText.text.isEmpty
+        self.descriptionText.layer.cornerRadius = 5
+        self.descriptionText.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.3).cgColor
+        self.descriptionText.layer.borderWidth = 1
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
     }
     
     // MARK: Actions

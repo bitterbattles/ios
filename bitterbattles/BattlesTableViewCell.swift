@@ -1,6 +1,6 @@
 import UIKit
 
-class ExploreTableViewCell: UITableViewCell {
+class BattlesTableViewCell: UITableViewCell {
     
     // MARK: Properties
     

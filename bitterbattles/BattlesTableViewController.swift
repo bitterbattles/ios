@@ -1,6 +1,6 @@
 import UIKit
 
-class ExploreViewController: UITableViewController  {
+class BattlesTableViewController: UITableViewController  {
     
     // MARK: Properties
     
@@ -8,11 +8,22 @@ class ExploreViewController: UITableViewController  {
     var spinner: Spinner?
     var alert: Alert?
     var battles = [Battle]()
+    var listType = "global"
     var currentSort = "recent"
+    var currentPage = 1
+    let pageSize = 25
     var isFirstAppearance = true
+    
+    // MARK: Overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if self.listType == "myVotes" {
+            self.sortControl.isHidden = true
+        }
+        self.refreshControl = UIRefreshControl()
+        self.tableView.addSubview(refreshControl!)
+        self.refreshControl!.addTarget(self, action: #selector(onRefresh(_:)), for: .valueChanged)
         self.spinner = Spinner(self)
         self.alert = Alert(self)
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "loggedIn"), object: nil)
@@ -23,7 +34,7 @@ class ExploreViewController: UITableViewController  {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if self.isFirstAppearance {
-            self.getBattles(true)
+            self.getBattles(resetData: true, showSpinner: true)
             self.isFirstAppearance = false
         }
     }
@@ -40,10 +51,17 @@ class ExploreViewController: UITableViewController  {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "ExploreTableViewCell"
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ExploreTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BattlesTableViewCell else {
             fatalError("The dequeued cell is not an instance of BattleTableViewCell.")
         }
-        let battle = self.battles[indexPath.row]
+        let index = indexPath.row
+        let nearEnd = (index > (self.battles.count * 3) / 4)
+        let hasMore = (self.battles.count == self.currentPage * self.pageSize)
+        if nearEnd && hasMore {
+            self.currentPage += 1
+            self.getBattles(resetData: false, showSpinner: false)
+        }
+        let battle = self.battles[index]
         cell.spinner = self.spinner
         cell.alert = self.alert
         cell.id = battle.id
@@ -77,8 +95,6 @@ class ExploreViewController: UITableViewController  {
     
     @IBAction func changeSort(_ sender: Any) {
         switch self.sortControl.selectedSegmentIndex {
-        case 0:
-            self.currentSort = "recent"
         case 1:
             self.currentSort = "popular"
         case 2:
@@ -86,29 +102,56 @@ class ExploreViewController: UITableViewController  {
         default:
             self.currentSort = "recent"
         }
-        self.getBattles(true)
+        self.getBattles(resetData: true, showSpinner: true)
     }
     
     // MARK: Notifications
     
+    @objc func onRefresh(_ sender: Any) {
+        self.getBattles(resetData: true, showSpinner: false)
+    }
+    
     @objc func onNotification(_ notification: Notification) {
-        self.getBattles(false)
+        self.getBattles(resetData: true, showSpinner: false)
     }
     
     // MARK: Private methods
     
-    func getBattles(_ showSpinner: Bool) {
+    func getBattles(resetData: Bool, showSpinner: Bool) {
         if showSpinner {
             self.spinner!.start()
         }
-        API.instance.getBattles(sort: self.currentSort, page: 1, pageSize: 25) { errorCode, battles in
+        if resetData {
+            self.currentPage = 1
+        }
+        switch self.listType {
+        case "myBattles":
+            API.instance.getMyBattles(sort: self.currentSort, page: self.currentPage, pageSize: self.pageSize) { errorCode, battles in
+                self.handleBattles(errorCode: errorCode, battles: battles, resetData: resetData, showSpinner: showSpinner)
+            }
+        case "myVotes":
+            API.instance.getMyVotes(page: self.currentPage, pageSize: self.pageSize) { errorCode, battles in
+                self.handleBattles(errorCode: errorCode, battles: battles, resetData: resetData, showSpinner: showSpinner)
+            }
+        default:
+            API.instance.getBattlesGlobal(sort: self.currentSort, page: self.currentPage, pageSize: self.pageSize) { errorCode, battles in
+                self.handleBattles(errorCode: errorCode, battles: battles, resetData: resetData, showSpinner: showSpinner)
+            }
+        }
+    }
+    
+    func handleBattles(errorCode: ErrorCode, battles: [Battle], resetData: Bool, showSpinner: Bool) {
+        if resetData {
             self.battles = battles
-            self.tableView.reloadData()
-            if showSpinner {
-                self.spinner!.stop() {
-                    if errorCode != ErrorCode.none {
-                        self.alert!.error("Failed to load Battles.")
-                    }
+        } else {
+            self.battles.append(contentsOf: battles)
+        }
+        self.tableView.reloadData()
+        self.refreshControl!.endRefreshing()
+        if showSpinner {
+            self.spinner!.stop() {
+                if errorCode != ErrorCode.none {
+                    self.alert!.error("Failed to load Battles.")
                 }
             }
         }
