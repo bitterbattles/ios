@@ -54,14 +54,16 @@ class API {
         requestBattles(uri: uri, completion: completion)
     }
     
+    public func deleteMyBattle(battleId: String, completion: @escaping (ErrorCode) -> Void) {
+        let uri = "users/me/battles/\(battleId)"
+        request(method: "DELETE", uri: uri, body: [:], completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            completion(self.getErrorCode(error: error, response: response, data: data))
+        })
+    }
+    
     public func getMyVotes(page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Battle]) -> Void) {
         let uri = "votes/me/battles?page=\(page)&pageSize=\(pageSize)"
         requestBattles(uri: uri, completion: completion)
-    }
-    
-    public func logOut() {
-        self.setAccessToken(value: "")
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "loggedOut"), object: nil)
     }
     
     public func postBattle(title: String, description: String, completion: @escaping (ErrorCode) -> Void) {
@@ -80,6 +82,18 @@ class API {
         request(method: "POST", uri: "votes", body: data, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
             completion(self.getErrorCode(error: error, response: response, data: data))
         })
+    }
+    
+    public func deleteMyAccount(completion: @escaping (ErrorCode) -> Void) {
+        let uri = "users/me"
+        request(method: "DELETE", uri: uri, body: [:], completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            completion(self.getErrorCode(error: error, response: response, data: data))
+        })
+    }
+    
+    public func logOut() {
+        self.setAccessToken(value: "")
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "loggedOut"), object: nil)
     }
     
     // MARK: Private methods

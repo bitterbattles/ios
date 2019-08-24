@@ -10,11 +10,13 @@
 		664DD13022341EAE00389062 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD12F22341EAE00389062 /* SignUpViewController.swift */; };
 		664DD13422361F2E00389062 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD13322361F2E00389062 /* API.swift */; };
 		664DD1362236F4B900389062 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD1352236F4B900389062 /* ErrorCode.swift */; };
+		665442EA2311FE71002C60FF /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665442E92311FE71002C60FF /* AccountDetailsViewController.swift */; };
 		666054AA223B1DF700EF61EC /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666054A9223B1DF700EF61EC /* Alert.swift */; };
 		66721FA92237FE7F001984C4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66721FA82237FE7F001984C4 /* LogInViewController.swift */; };
 		66721FB9223828DC001984C4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66721FB8223828DC001984C4 /* TabBarController.swift */; };
 		66721FBB22382FA2001984C4 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66721FBA22382FA1001984C4 /* AccountViewController.swift */; };
 		66721FBF2238AC7E001984C4 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66721FBE2238AC7E001984C4 /* Spinner.swift */; };
+		66D8B4B32311B0D200B1A9F4 /* YesNo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D8B4B22311B0D200B1A9F4 /* YesNo.swift */; };
 		66DBFC02221EF293007E990C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DBFC01221EF293007E990C /* AppDelegate.swift */; };
 		66DBFC04221EF293007E990C /* BattlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DBFC03221EF293007E990C /* BattlesTableViewController.swift */; };
 		66DBFC06221EF293007E990C /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DBFC05221EF293007E990C /* PostViewController.swift */; };
@@ -48,11 +50,13 @@
 		664DD12F22341EAE00389062 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		664DD13322361F2E00389062 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		664DD1352236F4B900389062 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
+		665442E92311FE71002C60FF /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		666054A9223B1DF700EF61EC /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		66721FA82237FE7F001984C4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		66721FB8223828DC001984C4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		66721FBA22382FA1001984C4 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		66721FBE2238AC7E001984C4 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		66D8B4B22311B0D200B1A9F4 /* YesNo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNo.swift; sourceTree = "<group>"; };
 		66DBFBFE221EF293007E990C /* bitterbattles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bitterbattles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DBFC01221EF293007E990C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66DBFC03221EF293007E990C /* BattlesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattlesTableViewController.swift; sourceTree = "<group>"; };
@@ -120,22 +124,24 @@
 			isa = PBXGroup;
 			children = (
 				66DBFC0A221EF293007E990C /* Assets.xcassets */,
-				66DBFC01221EF293007E990C /* AppDelegate.swift */,
 				66DBFC0F221EF293007E990C /* Info.plist */,
+				66DBFC01221EF293007E990C /* AppDelegate.swift */,
 				66DBFC0C221EF293007E990C /* LaunchScreen.storyboard */,
 				66DBFC07221EF293007E990C /* Main.storyboard */,
 				66721FB8223828DC001984C4 /* TabBarController.swift */,
 				66DBFC03221EF293007E990C /* BattlesTableViewController.swift */,
 				66FCF6CB2224C913009BEF1F /* BattlesTableViewCell.swift */,
+				66721FA82237FE7F001984C4 /* LogInViewController.swift */,
+				664DD12F22341EAE00389062 /* SignUpViewController.swift */,
 				66DBFC05221EF293007E990C /* PostViewController.swift */,
 				66721FBA22382FA1001984C4 /* AccountViewController.swift */,
-				664DD12F22341EAE00389062 /* SignUpViewController.swift */,
-				66721FA82237FE7F001984C4 /* LogInViewController.swift */,
+				665442E92311FE71002C60FF /* AccountDetailsViewController.swift */,
 				664DD13322361F2E00389062 /* API.swift */,
 				66E3DDE32226146B00B5C028 /* Battle.swift */,
 				664DD1352236F4B900389062 /* ErrorCode.swift */,
 				66721FBE2238AC7E001984C4 /* Spinner.swift */,
 				666054A9223B1DF700EF61EC /* Alert.swift */,
+				66D8B4B22311B0D200B1A9F4 /* YesNo.swift */,
 			);
 			path = bitterbattles;
 			sourceTree = "<group>";
@@ -293,9 +299,11 @@
 				66DBFC02221EF293007E990C /* AppDelegate.swift in Sources */,
 				66DBFC04221EF293007E990C /* BattlesTableViewController.swift in Sources */,
 				66721FB9223828DC001984C4 /* TabBarController.swift in Sources */,
+				66D8B4B32311B0D200B1A9F4 /* YesNo.swift in Sources */,
 				66E3DDE42226146B00B5C028 /* Battle.swift in Sources */,
 				66721FBB22382FA2001984C4 /* AccountViewController.swift in Sources */,
 				664DD13022341EAE00389062 /* SignUpViewController.swift in Sources */,
+				665442EA2311FE71002C60FF /* AccountDetailsViewController.swift in Sources */,
 				66721FBF2238AC7E001984C4 /* Spinner.swift in Sources */,
 				666054AA223B1DF700EF61EC /* Alert.swift in Sources */,
 				66FCF6CC2224C913009BEF1F /* BattlesTableViewCell.swift in Sources */,

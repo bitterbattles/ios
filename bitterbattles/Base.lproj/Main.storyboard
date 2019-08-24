@@ -245,6 +245,26 @@
                                             <segue destination="1fr-fQ-PjZ" kind="show" id="fMu-59-dMG"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="rmk-Tc-ZhU">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rmk-Tc-ZhU" id="Cpo-kY-jfS">
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSN-Gx-YCD">
+                                                    <rect key="frame" x="20" y="11" width="92" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="oIG-PG-9LT" kind="show" id="ida-zb-DLK"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -268,7 +288,32 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH7-g3-H7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2175" y="938"/>
+            <point key="canvasLocation" x="2173.913043478261" y="937.5"/>
+        </scene>
+        <!--Account Details-->
+        <scene sceneID="rHh-CN-Po3">
+            <objects>
+                <viewController id="oIG-PG-9LT" userLabel="Account Details" customClass="AccountDetailsViewController" customModule="bitterbattles" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LUx-xo-o9h">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMA-q3-5po">
+                                <rect key="frame" x="264" y="116" width="130" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete My Account"/>
+                                <connections>
+                                    <action selector="deleteAccount:" destination="oIG-PG-9LT" eventType="touchUpInside" id="eb0-yf-2bH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="vTo-dR-vgr"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ZO-Dp-fPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2943" y="938"/>
         </scene>
         <!--Account Logged Out Nav-->
         <scene sceneID="ois-pX-fIx">
@@ -565,6 +610,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fMu-59-dMG"/>
-        <segue reference="xCn-zX-k13"/>
+        <segue reference="1a0-mS-aq8"/>
     </inferredMetricsTieBreakers>
 </document>

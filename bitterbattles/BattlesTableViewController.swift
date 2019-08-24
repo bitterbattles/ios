@@ -7,6 +7,7 @@ class BattlesTableViewController: UITableViewController  {
     @IBOutlet weak var sortControl: UISegmentedControl!
     var spinner: Spinner?
     var alert: Alert?
+    var yesNo: YesNo?
     var battles = [Battle]()
     var listType = "global"
     var currentSort = "recent"
@@ -26,6 +27,7 @@ class BattlesTableViewController: UITableViewController  {
         self.refreshControl!.addTarget(self, action: #selector(onRefresh(_:)), for: .valueChanged)
         self.spinner = Spinner(self)
         self.alert = Alert(self)
+        self.yesNo = YesNo(self)
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "loggedIn"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "loggedOut"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "battlePosted"), object: nil)
@@ -83,6 +85,25 @@ class BattlesTableViewController: UITableViewController  {
         cell.voteForButton.isHidden = battle.hasVoted
         cell.voteAgainstButton.isHidden = battle.hasVoted
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.yesNo!.show(title: "Confirm", message: "Are you sure you want to delete this Battle?") {
+                uiAction in
+                if uiAction.style == .default {
+                    self.spinner!.start()
+                    let cell = self.tableView.cellForRow(at: indexPath) as! BattlesTableViewCell
+                    API.instance.deleteMyBattle(battleId: cell.id!) {
+                        errorCode in
+                        self.spinner!.stop() {
+                            self.battles.remove(at: indexPath.row)
+                            self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // MARK: Actions
