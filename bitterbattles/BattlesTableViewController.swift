@@ -80,10 +80,11 @@ class BattlesTableViewController: UITableViewController  {
         cell.votesForLabel.text = String(battle.votesFor)
         cell.votesAgainstLabel.text = String(battle.votesAgainst)
         let isLoggedIn = API.instance.isLoggedIn()
-        cell.votesForLabel.isHidden = !battle.hasVoted || !isLoggedIn
-        cell.votesAgainstLabel.isHidden = !battle.hasVoted || !isLoggedIn
-        cell.voteForButton.isHidden = battle.hasVoted
-        cell.voteAgainstButton.isHidden = battle.hasVoted
+        let hideVoteButtons = (isLoggedIn && !battle.canVote)
+        cell.voteForButton.isHidden = hideVoteButtons
+        cell.voteAgainstButton.isHidden = hideVoteButtons
+        cell.votesForLabel.isHidden = !hideVoteButtons
+        cell.votesAgainstLabel.isHidden = !hideVoteButtons
         return cell
     }
     
