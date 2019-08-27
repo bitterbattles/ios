@@ -51,7 +51,6 @@ class PostViewController: UIViewController, UITextViewDelegate {
                 if errorCode == ErrorCode.none {
                     self.titleText.text = ""
                     self.descriptionText.text = ""
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "battlePosted"), object: nil)
                 }
                 self.spinner!.stop() {
                     if errorCode == ErrorCode.none {

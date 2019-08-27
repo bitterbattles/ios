@@ -8,6 +8,7 @@ class BattlesTableViewController: UITableViewController  {
     var spinner: Spinner?
     var alert: Alert?
     var yesNo: YesNo?
+    var enableDelete = false
     var battles = [Battle]()
     var listType = "global"
     var currentSort = "recent"
@@ -30,7 +31,6 @@ class BattlesTableViewController: UITableViewController  {
         self.yesNo = YesNo(self)
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "loggedIn"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "loggedOut"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "battlePosted"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,6 +86,13 @@ class BattlesTableViewController: UITableViewController  {
         cell.votesForLabel.isHidden = !hideVoteButtons
         cell.votesAgainstLabel.isHidden = !hideVoteButtons
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if enableDelete {
+            return .delete
+        }
+        return .none
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

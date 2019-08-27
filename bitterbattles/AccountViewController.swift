@@ -15,6 +15,7 @@ class AccountViewController: UITableViewController {
             viewController.listType = "myVotes"
         default:
             viewController.listType = "myBattles"
+            viewController.enableDelete = true
         }
     }
     
