@@ -4,6 +4,7 @@ class Spinner {
     
     var parent: UIViewController
     var controller: UIAlertController
+    var isVisible: Bool
     
     init(_ parent: UIViewController) {
         self.parent = parent
@@ -13,14 +14,21 @@ class Spinner {
         indicator.startAnimating()
         self.controller = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         self.controller.view.addSubview(indicator)
+        self.isVisible = false
     }
     
     func start() {
-        self.parent.present(self.controller, animated: true, completion: nil)
+        if !self.isVisible {
+            self.parent.present(self.controller, animated: true, completion: nil)
+            self.isVisible = true
+        }
     }
     
     func stop(_ completion: @escaping () -> Void) {
-        self.controller.dismiss(animated: true, completion: completion)
+        if self.isVisible {
+            self.controller.dismiss(animated: true, completion: completion)
+            self.isVisible = false
+        }
     }
     
 }

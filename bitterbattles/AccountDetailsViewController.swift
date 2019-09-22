@@ -24,7 +24,7 @@ class AccountDetailsViewController: UIViewController {
                 API.instance.deleteMyAccount() {
                     errorCode in
                     self.spinner!.stop() {
-                        API.instance.logOut()
+                        API.instance.logOut(sendNotification: true)
                     }
                 }
             }

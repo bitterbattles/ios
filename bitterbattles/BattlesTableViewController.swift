@@ -14,7 +14,6 @@ class BattlesTableViewController: UITableViewController  {
     var currentSort = "recent"
     var currentPage = 1
     let pageSize = 25
-    var isFirstAppearance = true
     
     // MARK: Overrides
     
@@ -29,15 +28,14 @@ class BattlesTableViewController: UITableViewController  {
         self.spinner = Spinner(self)
         self.alert = Alert(self)
         self.yesNo = YesNo(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "loggedIn"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onNotification(_:)), name: NSNotification.Name(rawValue: "loggedOut"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onLoginChanged(_:)), name: NSNotification.Name(rawValue: "loggedIn"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onLoginChanged(_:)), name: NSNotification.Name(rawValue: "loggedOut"), object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if self.isFirstAppearance {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.battles.count == 0 {
             self.getBattles(resetData: true, showSpinner: true)
-            self.isFirstAppearance = false
         }
     }
     
@@ -140,8 +138,10 @@ class BattlesTableViewController: UITableViewController  {
         self.getBattles(resetData: true, showSpinner: false)
     }
     
-    @objc func onNotification(_ notification: Notification) {
-        self.getBattles(resetData: true, showSpinner: false)
+    @objc func onLoginChanged(_ notification: Notification) {
+        self.currentPage = 1
+        self.battles = []
+        self.tableView.reloadData()
     }
     
     // MARK: Private methods

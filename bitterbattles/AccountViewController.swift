@@ -22,7 +22,7 @@ class AccountViewController: UITableViewController {
     // MARK: Actions
 
     @IBAction func logOut(_ sender: Any) {
-        API.instance.logOut()
+        API.instance.logOut(sendNotification: true)
     }
     
 }

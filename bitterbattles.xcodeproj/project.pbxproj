@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		664D6E612337CA0100A964A8 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664D6E602337CA0100A964A8 /* LoadingViewController.swift */; };
 		664DD13022341EAE00389062 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD12F22341EAE00389062 /* SignUpViewController.swift */; };
 		664DD13422361F2E00389062 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD13322361F2E00389062 /* API.swift */; };
 		664DD1362236F4B900389062 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD1352236F4B900389062 /* ErrorCode.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		664D6E602337CA0100A964A8 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		664DD12F22341EAE00389062 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		664DD13322361F2E00389062 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		664DD1352236F4B900389062 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				66DBFC01221EF293007E990C /* AppDelegate.swift */,
 				66DBFC0C221EF293007E990C /* LaunchScreen.storyboard */,
 				66DBFC07221EF293007E990C /* Main.storyboard */,
+				664D6E602337CA0100A964A8 /* LoadingViewController.swift */,
 				66721FB8223828DC001984C4 /* TabBarController.swift */,
 				66DBFC03221EF293007E990C /* BattlesTableViewController.swift */,
 				66FCF6CB2224C913009BEF1F /* BattlesTableViewCell.swift */,
@@ -298,6 +301,7 @@
 				66DBFC06221EF293007E990C /* PostViewController.swift in Sources */,
 				66DBFC02221EF293007E990C /* AppDelegate.swift in Sources */,
 				66DBFC04221EF293007E990C /* BattlesTableViewController.swift in Sources */,
+				664D6E612337CA0100A964A8 /* LoadingViewController.swift in Sources */,
 				66721FB9223828DC001984C4 /* TabBarController.swift in Sources */,
 				66D8B4B32311B0D200B1A9F4 /* YesNo.swift in Sources */,
 				66E3DDE42226146B00B5C028 /* Battle.swift in Sources */,
