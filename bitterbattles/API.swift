@@ -50,6 +50,27 @@ class API {
         requestBattles(uri: uri, completion: completion)
     }
     
+    public func getBattleById(battleId: String, completion: @escaping (ErrorCode, Battle?) -> Void) {
+        let uri = "battles/\(battleId)"
+        request(method: "GET", uri: uri, body: [:], attemptRefresh: true, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            let errorCode = self.getErrorCode(error: error, response: response, data: data)
+            if errorCode != ErrorCode.none {
+                completion(errorCode, nil)
+                return
+            }
+            if data != nil, let result = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                completion(ErrorCode.none, Battle(data: result ?? [:]))
+                return
+            }
+            completion(ErrorCode.unknown, nil)
+        })
+    }
+    
+    public func getComments(battleId: String, page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Comment]) -> Void) {
+        let uri = "battles/\(battleId)/comments?page=\(page)&pageSize=\(pageSize)"
+        requestComments(uri: uri, completion: completion)
+    }
+    
     public func signUp(username: String, password: String, completion: @escaping (ErrorCode) -> Void) {
         var data = [String: Any]()
         data["username"] = username
@@ -94,6 +115,14 @@ class API {
         })
     }
     
+    public func postComment(battleId: String, comment: String, completion: @escaping (ErrorCode) -> Void) {
+        var data = [String: Any]()
+        data["comment"] = comment
+        request(method: "POST", uri: "battles/\(battleId)/comments", body: data, attemptRefresh: true, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            completion(self.getErrorCode(error: error, response: response, data: data))
+        })
+    }
+    
     public func postBattle(title: String, description: String, completion: @escaping (ErrorCode) -> Void) {
         var data = [String: Any]()
         data["title"] = title
@@ -104,20 +133,27 @@ class API {
     }
     
     public func getMyBattles(sort: String, page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Battle]) -> Void) {
-        let uri = "users/me/battles?sort=\(sort)&page=\(page)&pageSize=\(pageSize)"
+        let uri = "battles/me?sort=\(sort)&page=\(page)&pageSize=\(pageSize)"
         requestBattles(uri: uri, completion: completion)
     }
     
     public func deleteMyBattle(battleId: String, completion: @escaping (ErrorCode) -> Void) {
-        let uri = "users/me/battles/\(battleId)"
+        let uri = "battles/me/\(battleId)"
         request(method: "DELETE", uri: uri, body: [:], attemptRefresh: true, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
             completion(self.getErrorCode(error: error, response: response, data: data))
         })
     }
     
-    public func getMyVotes(page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Battle]) -> Void) {
-        let uri = "votes/me/battles?page=\(page)&pageSize=\(pageSize)"
-        requestBattles(uri: uri, completion: completion)
+    public func getMyComments(page: Int, pageSize: Int, completion: @escaping (ErrorCode, [Comment]) -> Void) {
+        let uri = "comments/me?page=\(page)&pageSize=\(pageSize)"
+        requestComments(uri: uri, completion: completion)
+    }
+    
+    public func deleteMyComment(commentId: String, completion: @escaping (ErrorCode) -> Void) {
+        let uri = "comments/me/\(commentId)"
+        request(method: "DELETE", uri: uri, body: [:], attemptRefresh: true, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            completion(self.getErrorCode(error: error, response: response, data: data))
+        })
     }
     
     public func deleteMyAccount(completion: @escaping (ErrorCode) -> Void) {
@@ -142,6 +178,22 @@ class API {
                 }
             }
             completion(ErrorCode.none, battles)
+        })
+    }
+    
+    func requestComments(uri: String, completion: @escaping (ErrorCode, [Comment]) -> Void) {
+        request(method: "GET", uri: uri, body: [:], attemptRefresh: true, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            let errorCode = self.getErrorCode(error: error, response: response, data: data)
+            if errorCode != ErrorCode.none {
+                completion(errorCode, [])
+            }
+            var comments :[Comment] = []
+            if data != nil, let results = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
+                for case let result in results ?? [] {
+                    comments.append(Comment(data: result))
+                }
+            }
+            completion(ErrorCode.none, comments)
         })
     }
     

@@ -11,10 +11,9 @@ class AccountViewController: UITableViewController {
                 return
         }
         switch index {
-        case 1:
-            viewController.listType = "myVotes"
         default:
             viewController.listType = "myBattles"
+            viewController.navigationItem.title = "My Battles"
             viewController.enableDelete = true
         }
     }

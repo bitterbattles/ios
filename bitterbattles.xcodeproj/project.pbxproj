@@ -17,6 +17,15 @@
 		66721FB9223828DC001984C4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66721FB8223828DC001984C4 /* TabBarController.swift */; };
 		66721FBB22382FA2001984C4 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66721FBA22382FA1001984C4 /* AccountViewController.swift */; };
 		66721FBF2238AC7E001984C4 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66721FBE2238AC7E001984C4 /* Spinner.swift */; };
+		667953E5233BBD52003B6BEC /* Verdict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667953E4233BBD52003B6BEC /* Verdict.swift */; };
+		66D02DD7235764E700371A09 /* PostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D02DD6235764E700371A09 /* PostCommentViewController.swift */; };
+		66D02DD9235766BA00371A09 /* CommentsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D02DD8235766BA00371A09 /* CommentsHeaderTableViewCell.swift */; };
+		66D02DDB235934E100371A09 /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D02DDA235934E100371A09 /* CommentsTableViewController.swift */; };
+		66D83394234B785500481A82 /* BattlesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66D83393234B785500481A82 /* BattlesTableViewCell.xib */; };
+		66D83397234B7B1500481A82 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D83395234B7B1500481A82 /* CommentsTableViewCell.swift */; };
+		66D83398234B7B1500481A82 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66D83396234B7B1500481A82 /* CommentsTableViewCell.xib */; };
+		66D8339A234D5AB700481A82 /* BattleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D83399234D5AB700481A82 /* BattleDetailsViewController.swift */; };
+		66D8339C234D5C9900481A82 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D8339B234D5C9900481A82 /* Comment.swift */; };
 		66D8B4B32311B0D200B1A9F4 /* YesNo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D8B4B22311B0D200B1A9F4 /* YesNo.swift */; };
 		66DBFC02221EF293007E990C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DBFC01221EF293007E990C /* AppDelegate.swift */; };
 		66DBFC04221EF293007E990C /* BattlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DBFC03221EF293007E990C /* BattlesTableViewController.swift */; };
@@ -58,6 +67,15 @@
 		66721FB8223828DC001984C4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		66721FBA22382FA1001984C4 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		66721FBE2238AC7E001984C4 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		667953E4233BBD52003B6BEC /* Verdict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verdict.swift; sourceTree = "<group>"; };
+		66D02DD6235764E700371A09 /* PostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewController.swift; sourceTree = "<group>"; };
+		66D02DD8235766BA00371A09 /* CommentsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		66D02DDA235934E100371A09 /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
+		66D83393234B785500481A82 /* BattlesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BattlesTableViewCell.xib; sourceTree = "<group>"; };
+		66D83395234B7B1500481A82 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		66D83396234B7B1500481A82 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
+		66D83399234D5AB700481A82 /* BattleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleDetailsViewController.swift; sourceTree = "<group>"; };
+		66D8339B234D5C9900481A82 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		66D8B4B22311B0D200B1A9F4 /* YesNo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNo.swift; sourceTree = "<group>"; };
 		66DBFBFE221EF293007E990C /* bitterbattles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bitterbattles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DBFC01221EF293007E990C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,17 +152,26 @@
 				66721FB8223828DC001984C4 /* TabBarController.swift */,
 				66DBFC03221EF293007E990C /* BattlesTableViewController.swift */,
 				66FCF6CB2224C913009BEF1F /* BattlesTableViewCell.swift */,
+				66D83393234B785500481A82 /* BattlesTableViewCell.xib */,
+				66D83399234D5AB700481A82 /* BattleDetailsViewController.swift */,
+				66D02DD8235766BA00371A09 /* CommentsHeaderTableViewCell.swift */,
+				66D83395234B7B1500481A82 /* CommentsTableViewCell.swift */,
+				66D83396234B7B1500481A82 /* CommentsTableViewCell.xib */,
+				66D02DD6235764E700371A09 /* PostCommentViewController.swift */,
 				66721FA82237FE7F001984C4 /* LogInViewController.swift */,
 				664DD12F22341EAE00389062 /* SignUpViewController.swift */,
 				66DBFC05221EF293007E990C /* PostViewController.swift */,
 				66721FBA22382FA1001984C4 /* AccountViewController.swift */,
+				66D02DDA235934E100371A09 /* CommentsTableViewController.swift */,
 				665442E92311FE71002C60FF /* AccountDetailsViewController.swift */,
 				664DD13322361F2E00389062 /* API.swift */,
 				66E3DDE32226146B00B5C028 /* Battle.swift */,
+				66D8339B234D5C9900481A82 /* Comment.swift */,
 				664DD1352236F4B900389062 /* ErrorCode.swift */,
 				66721FBE2238AC7E001984C4 /* Spinner.swift */,
 				666054A9223B1DF700EF61EC /* Alert.swift */,
 				66D8B4B22311B0D200B1A9F4 /* YesNo.swift */,
+				667953E4233BBD52003B6BEC /* Verdict.swift */,
 			);
 			path = bitterbattles;
 			sourceTree = "<group>";
@@ -274,6 +301,8 @@
 				66DBFC0E221EF293007E990C /* LaunchScreen.storyboard in Resources */,
 				66DBFC0B221EF293007E990C /* Assets.xcassets in Resources */,
 				66DBFC09221EF293007E990C /* Main.storyboard in Resources */,
+				66D83394234B785500481A82 /* BattlesTableViewCell.xib in Resources */,
+				66D83398234B7B1500481A82 /* CommentsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,13 +332,20 @@
 				66DBFC04221EF293007E990C /* BattlesTableViewController.swift in Sources */,
 				664D6E612337CA0100A964A8 /* LoadingViewController.swift in Sources */,
 				66721FB9223828DC001984C4 /* TabBarController.swift in Sources */,
+				66D8339A234D5AB700481A82 /* BattleDetailsViewController.swift in Sources */,
 				66D8B4B32311B0D200B1A9F4 /* YesNo.swift in Sources */,
+				667953E5233BBD52003B6BEC /* Verdict.swift in Sources */,
+				66D83397234B7B1500481A82 /* CommentsTableViewCell.swift in Sources */,
 				66E3DDE42226146B00B5C028 /* Battle.swift in Sources */,
 				66721FBB22382FA2001984C4 /* AccountViewController.swift in Sources */,
 				664DD13022341EAE00389062 /* SignUpViewController.swift in Sources */,
+				66D02DD7235764E700371A09 /* PostCommentViewController.swift in Sources */,
+				66D02DDB235934E100371A09 /* CommentsTableViewController.swift in Sources */,
 				665442EA2311FE71002C60FF /* AccountDetailsViewController.swift in Sources */,
+				66D02DD9235766BA00371A09 /* CommentsHeaderTableViewCell.swift in Sources */,
 				66721FBF2238AC7E001984C4 /* Spinner.swift in Sources */,
 				666054AA223B1DF700EF61EC /* Alert.swift in Sources */,
+				66D8339C234D5C9900481A82 /* Comment.swift in Sources */,
 				66FCF6CC2224C913009BEF1F /* BattlesTableViewCell.swift in Sources */,
 				664DD13422361F2E00389062 /* API.swift in Sources */,
 				66721FA92237FE7F001984C4 /* LogInViewController.swift in Sources */,

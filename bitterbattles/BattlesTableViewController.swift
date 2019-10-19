@@ -19,21 +19,20 @@ class BattlesTableViewController: UITableViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if self.listType == "myVotes" {
-            self.sortControl.isHidden = true
-        }
         self.refreshControl = UIRefreshControl()
         self.tableView.addSubview(refreshControl!)
         self.refreshControl!.addTarget(self, action: #selector(onRefresh(_:)), for: .valueChanged)
         self.spinner = Spinner(self)
         self.alert = Alert(self)
         self.yesNo = YesNo(self)
+        self.tableView.register(UINib(nibName: "BattlesTableViewCell", bundle: nil), forCellReuseIdentifier: "battle")
         NotificationCenter.default.addObserver(self, selector: #selector(onLoginChanged(_:)), name: NSNotification.Name(rawValue: "loggedIn"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onLoginChanged(_:)), name: NSNotification.Name(rawValue: "loggedOut"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onLoginNeeded), name: NSNotification.Name(rawValue: "loginNeeded"), object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if self.battles.count == 0 {
             self.getBattles(resetData: true, showSpinner: true)
         }
@@ -50,10 +49,7 @@ class BattlesTableViewController: UITableViewController  {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "ExploreTableViewCell"
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BattlesTableViewCell else {
-            fatalError("The dequeued cell is not an instance of BattleTableViewCell.")
-        }
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "battle", for: indexPath) as! BattlesTableViewCell
         let index = indexPath.row
         let nearEnd = (index > (self.battles.count * 3) / 4)
         let hasMore = (self.battles.count == self.currentPage * self.pageSize)
@@ -61,28 +57,9 @@ class BattlesTableViewController: UITableViewController  {
             self.currentPage += 1
             self.getBattles(resetData: false, showSpinner: false)
         }
-        let battle = self.battles[index]
         cell.spinner = self.spinner
         cell.alert = self.alert
-        cell.id = battle.id
-        cell.votesFor = battle.votesFor
-        cell.votesAgainst = battle.votesAgainst
-        cell.titleLabel.text = battle.title
-        cell.titleLabel.numberOfLines = 0
-        cell.titleLabel.sizeToFit()
-        cell.createdOnLabel.text = self.toDate(unixTime: battle.createdOn)
-        cell.usernameLabel.text = battle.username
-        cell.descriptionLabel.text = battle.description
-        cell.descriptionLabel.numberOfLines = 0
-        cell.descriptionLabel.sizeToFit()
-        cell.votesForLabel.text = String(battle.votesFor)
-        cell.votesAgainstLabel.text = String(battle.votesAgainst)
-        let isLoggedIn = API.instance.isLoggedIn()
-        let hideVoteButtons = (isLoggedIn && !battle.canVote)
-        cell.voteForButton.isHidden = hideVoteButtons
-        cell.voteAgainstButton.isHidden = hideVoteButtons
-        cell.votesForLabel.isHidden = !hideVoteButtons
-        cell.votesAgainstLabel.isHidden = !hideVoteButtons
+        cell.updateUI(self.battles[index])
         return cell
     }
     
@@ -100,7 +77,7 @@ class BattlesTableViewController: UITableViewController  {
                 if uiAction.style == .default {
                     self.spinner!.start()
                     let cell = self.tableView.cellForRow(at: indexPath) as! BattlesTableViewCell
-                    API.instance.deleteMyBattle(battleId: cell.id!) {
+                    API.instance.deleteMyBattle(battleId: cell.battle!.id) {
                         errorCode in
                         self.spinner!.stop() {
                             self.battles.remove(at: indexPath.row)
@@ -112,13 +89,19 @@ class BattlesTableViewController: UITableViewController  {
         }
     }
     
-    // MARK: Actions
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "selectBattleSegue", sender: self)
+    }
     
-    @IBAction func vote(_ sender: Any) {
-        if !API.instance.isLoggedIn() {
-            self.performSegue(withIdentifier: "logInSegue", sender: self)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let viewController = segue.destination as? BattleDetailsViewController
+        if viewController != nil {
+            let index = self.tableView.indexPathForSelectedRow!.row
+            viewController!.battleId = self.battles[index].id
         }
     }
+    
+    // MARK: Actions
     
     @IBAction func changeSort(_ sender: Any) {
         switch self.sortControl.selectedSegmentIndex {
@@ -144,6 +127,10 @@ class BattlesTableViewController: UITableViewController  {
         self.tableView.reloadData()
     }
     
+    @objc func onLoginNeeded(_ notification: Notification) {
+        self.performSegue(withIdentifier: "logInSegue", sender: self)
+    }
+    
     // MARK: Private methods
     
     func getBattles(resetData: Bool, showSpinner: Bool) {
@@ -156,10 +143,6 @@ class BattlesTableViewController: UITableViewController  {
         switch self.listType {
         case "myBattles":
             API.instance.getMyBattles(sort: self.currentSort, page: self.currentPage, pageSize: self.pageSize) { errorCode, battles in
-                self.handleBattles(errorCode: errorCode, battles: battles, resetData: resetData, showSpinner: showSpinner)
-            }
-        case "myVotes":
-            API.instance.getMyVotes(page: self.currentPage, pageSize: self.pageSize) { errorCode, battles in
                 self.handleBattles(errorCode: errorCode, battles: battles, resetData: resetData, showSpinner: showSpinner)
             }
         default:
@@ -184,10 +167,6 @@ class BattlesTableViewController: UITableViewController  {
                 }
             }
         }
-    }
-    
-    func toDate(unixTime: Int64) -> String {
-        return String(unixTime) // TODO
     }
     
 }
