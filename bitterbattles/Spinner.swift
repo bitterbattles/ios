@@ -19,14 +19,14 @@ class Spinner {
     
     func start() {
         if !self.isVisible {
-            self.parent.present(self.controller, animated: false, completion: nil)
+            self.parent.present(self.controller, animated: true, completion: nil)
             self.isVisible = true
         }
     }
     
     func stop(_ completion: @escaping () -> Void) {
         if self.isVisible {
-            self.controller.dismiss(animated: false, completion: completion)
+            self.controller.dismiss(animated: true, completion: completion)
             self.isVisible = false
         }
     }
