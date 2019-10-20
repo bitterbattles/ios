@@ -10,7 +10,7 @@ class Spinner {
         self.parent = parent
         let indicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         indicator.hidesWhenStopped = true
-        indicator.style = UIActivityIndicatorView.Style.gray
+        indicator.style = UIActivityIndicatorView.Style.large
         indicator.startAnimating()
         self.controller = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         self.controller.view.addSubview(indicator)
@@ -19,14 +19,14 @@ class Spinner {
     
     func start() {
         if !self.isVisible {
-            self.parent.present(self.controller, animated: true, completion: nil)
+            self.parent.present(self.controller, animated: false, completion: nil)
             self.isVisible = true
         }
     }
     
     func stop(_ completion: @escaping () -> Void) {
         if self.isVisible {
-            self.controller.dismiss(animated: true, completion: completion)
+            self.controller.dismiss(animated: false, completion: completion)
             self.isVisible = false
         }
     }

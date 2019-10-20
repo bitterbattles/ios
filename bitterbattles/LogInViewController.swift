@@ -22,7 +22,8 @@ class LogInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.navigationController?.presentingViewController == nil {
+        let presentingController = self.navigationController?.presentingViewController as? TabBarController
+        if presentingController == nil {
             if self.navigationItem.rightBarButtonItem != nil {
                 self.navigationItem.rightBarButtonItem = nil
             }

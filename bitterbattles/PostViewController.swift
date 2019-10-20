@@ -23,11 +23,11 @@ class PostViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.sizeToFit()
         descriptionText.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (descriptionText.font?.pointSize)! / 2)
-        placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.5)
+        placeholderLabel.textColor = UIColor.systemGray2.withAlphaComponent(0.6)
         placeholderLabel.isHidden = !descriptionText.text.isEmpty
         self.descriptionText.layer.cornerRadius = 5
-        self.descriptionText.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.3).cgColor
-        self.descriptionText.layer.borderWidth = 1
+        self.descriptionText.layer.borderColor = UIColor.systemGray2.withAlphaComponent(0.3).cgColor
+        self.descriptionText.layer.borderWidth = 0.8
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
