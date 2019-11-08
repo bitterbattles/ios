@@ -12,6 +12,8 @@ class CommentsTableViewCell: UITableViewCell {
     public func updateUI(_ comment: Comment) {
         self.authorLabel.text = String(format: "%@ ago by %@", self.getDeltaTime(comment.createdOn), comment.username)
         self.commentLabel.text = comment.comment
+        self.commentLabel.numberOfLines = 0
+        self.commentLabel.sizeToFit()
     }
     
     // MARK: Private methods

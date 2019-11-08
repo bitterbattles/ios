@@ -3,6 +3,7 @@ import UIKit
 class AccountDetailsViewController: UIViewController {
     
     // MARK: Properties
+    
     var spinner: Spinner?
     var yesNo: YesNo?
     

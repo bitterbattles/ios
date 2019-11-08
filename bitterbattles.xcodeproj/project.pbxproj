@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		662CB8882375BCD900521082 /* LegalDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662CB8872375BCD900521082 /* LegalDocumentsViewController.swift */; };
 		664D6E612337CA0100A964A8 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664D6E602337CA0100A964A8 /* LoadingViewController.swift */; };
 		664DD13022341EAE00389062 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD12F22341EAE00389062 /* SignUpViewController.swift */; };
 		664DD13422361F2E00389062 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664DD13322361F2E00389062 /* API.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		662CB8872375BCD900521082 /* LegalDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentsViewController.swift; sourceTree = "<group>"; };
 		664D6E602337CA0100A964A8 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		664DD12F22341EAE00389062 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		664DD13322361F2E00389062 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				66721FBA22382FA1001984C4 /* AccountViewController.swift */,
 				66D02DDA235934E100371A09 /* CommentsTableViewController.swift */,
 				665442E92311FE71002C60FF /* AccountDetailsViewController.swift */,
+				662CB8872375BCD900521082 /* LegalDocumentsViewController.swift */,
 				664DD13322361F2E00389062 /* API.swift */,
 				66E3DDE32226146B00B5C028 /* Battle.swift */,
 				66D8339B234D5C9900481A82 /* Comment.swift */,
@@ -350,6 +353,7 @@
 				664DD13422361F2E00389062 /* API.swift in Sources */,
 				66721FA92237FE7F001984C4 /* LogInViewController.swift in Sources */,
 				664DD1362236F4B900389062 /* ErrorCode.swift in Sources */,
+				662CB8882375BCD900521082 /* LegalDocumentsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

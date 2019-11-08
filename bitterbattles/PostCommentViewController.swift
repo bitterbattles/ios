@@ -23,11 +23,11 @@ class PostCommentViewController: UIViewController, UITextViewDelegate {
         placeholderLabel.sizeToFit()
         commentText.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (commentText.font?.pointSize)! / 2)
-        placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.5)
+        placeholderLabel.textColor = UIColor.systemGray2.withAlphaComponent(0.6)
         placeholderLabel.isHidden = !commentText.text.isEmpty
         self.commentText.layer.cornerRadius = 5
-        self.commentText.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.3).cgColor
-        self.commentText.layer.borderWidth = 1
+        self.commentText.layer.borderColor = UIColor.systemGray2.withAlphaComponent(0.3).cgColor
+        self.commentText.layer.borderWidth = 0.8
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
 
@@ -47,12 +47,10 @@ class PostCommentViewController: UIViewController, UITextViewDelegate {
             }
             self.spinner!.start()
             API.instance.postComment(battleId: self.battleId!, comment: comment) { errorCode in
-                if errorCode == ErrorCode.none {
-                    self.commentText.text = ""
-                }
                 self.spinner!.stop() {
                     if errorCode == ErrorCode.none {
-                        self.alert!.success("Comment successfully created.")
+                        _ = self.navigationController?.popViewController(animated: true)
+                        self.commentText.text = ""
                     } else {
                         self.alert!.error("Failed to create the comment.")
                     }
