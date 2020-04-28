@@ -58,7 +58,7 @@ class API {
                 completion(errorCode, nil)
                 return
             }
-            if data != nil, let result = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+            if data != nil, let result = ((try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]) as [String : Any]??) {
                 completion(ErrorCode.none, Battle(data: result ?? [:]))
                 return
             }
@@ -172,7 +172,7 @@ class API {
                 completion(errorCode, [])
             }
             var battles :[Battle] = []
-            if data != nil, let results = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
+            if data != nil, let results = ((try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]]) as [[String : Any]]??) {
                 for case let result in results ?? [] {
                     battles.append(Battle(data: result))
                 }
@@ -188,7 +188,7 @@ class API {
                 completion(errorCode, [])
             }
             var comments :[Comment] = []
-            if data != nil, let results = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
+            if data != nil, let results = ((try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]]) as [[String : Any]]??) {
                 for case let result in results ?? [] {
                     comments.append(Comment(data: result))
                 }
@@ -232,7 +232,7 @@ class API {
                 return ErrorCode.none
             }
         }
-        if data != nil, let result = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+        if data != nil, let result = ((try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]) as [String : Any]??) {
             if let errorCode = result?["errorCode"] as? Int {
                 return ErrorCode(rawValue: errorCode) ?? ErrorCode.unknown
             }
@@ -242,7 +242,7 @@ class API {
     
     func handleLogin(data: Data?, sendNotification: Bool) {
         let wasLoggedIn = self.isLoggedIn()
-        if data != nil, let result = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+        if data != nil, let result = ((try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]) as [String : Any]??) {
             let now = self.now()
             self.accessToken = result?["accessToken"] as? String ?? ""
             self.accessExpiresOn = now + (result?["accessExpiresIn"] as? Int64 ?? 0)

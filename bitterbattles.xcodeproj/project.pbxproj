@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -265,19 +265,22 @@
 				TargetAttributes = {
 					66DBFBFD221EF293007E990C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
 					};
 					66DBFC13221EF293007E990C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
 						TestTargetID = 66DBFBFD221EF293007E990C;
 					};
 					66DBFC1E221EF294007E990C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
 						TestTargetID = 66DBFBFD221EF293007E990C;
 					};
 				};
 			};
 			buildConfigurationList = 66DBFBF9221EF293007E990C /* Build configuration list for PBXProject "bitterbattles" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -459,7 +462,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -514,7 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -540,7 +543,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.littlewolfsoftware.bitterbattles.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -561,7 +564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.littlewolfsoftware.bitterbattles.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -580,7 +583,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.littlewolfsoftware.bitterbattlesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bitterbattles.app/bitterbattles";
 			};
@@ -600,7 +603,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.littlewolfsoftware.bitterbattlesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bitterbattles.app/bitterbattles";
 			};
@@ -619,7 +622,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.littlewolfsoftware.bitterbattlesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = bitterbattles;
 			};
@@ -638,7 +641,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.littlewolfsoftware.bitterbattlesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = bitterbattles;
 			};
